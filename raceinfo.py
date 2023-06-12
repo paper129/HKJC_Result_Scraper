@@ -112,11 +112,11 @@ def proc_dri(log_obj, html, driver, soup1, year, mth, day, RaceNo, loc, syr):
 
                     # print(my_dict)
                     writer.writerow(my_dict)
-                    log_obj.info(
-                        "Logging to csv: Date: %s - Race %s Done".format(),
-                        date,
-                        temp2[0],
-                    )
+                log_obj.info(
+                    "Logging to csv: Date: %s - Race %s Done".format(),
+                    date,
+                    temp2[0],
+                )
         except Exception as e:
             log_obj.critical("Error: Expection %s", exc_info=e)
             pass
