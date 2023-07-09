@@ -180,7 +180,8 @@ def web(log_obj, link, year, mth, day, RaceNo, loc, syr):
     driver = webdriver.Firefox(service=serv, options=fireFoxOptions)
     driver.implicitly_wait(10)
     driver.set_page_load_timeout(10)
-    cnt = 0
+    # Add exception handling on timeout (10s)
+    cnt = 0 # counter for timeout exception
     try:
         driver.get(link)
     except TimeoutException:
