@@ -2,6 +2,7 @@ import logging
 import sys
 from bs4 import BeautifulSoup
 from selenium.webdriver.firefox.service import Service
+from selenium.common.exceptions import TimeoutException
 from selenium import webdriver
 import time
 import csv
@@ -177,9 +178,22 @@ def web(log_obj, link, year, mth, day, RaceNo, loc, syr):
     # Firefox Driver drive code
     serv = Service("./geckodriver.exe")
     driver = webdriver.Firefox(service=serv, options=fireFoxOptions)
-
-    driver.get(link)
-    time.sleep(5)
+    driver.implicitly_wait(10)
+    driver.set_page_load_timeout(10)
+    cnt = 0
+    try:
+        driver.get(link)
+    except TimeoutException:
+        cnt +=1
+        log_obj.info("Timeout Exception, reloading " + str(cnt) + "/3 times, retrying...")
+        if cnt < 3:
+            time.sleep(5)
+            driver.get(link)
+        else:
+            log_obj.error("Timeout Exception, reloaded "+ str(cnt) + "/3 times, stopping the program...")
+            sys.exit(0)
+    
+    
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     driver.close()
