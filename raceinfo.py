@@ -96,7 +96,7 @@ def proc_dri(log_obj, html, driver, soup1, year, mth, day, RaceNo, loc, syr):
                         .replace("                                ", "")
                         .replace("                ", "")
                         .replace("            ", "")
-                        .replace("        ", "")
+                        .replace("        ", " ")
                         for i in vals.find_all("td")
                     ]
                     my_dict.update(dict(zip(headers, vals)))
