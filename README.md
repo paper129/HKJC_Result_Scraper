@@ -5,8 +5,8 @@ Currently, a manual change of racecourse code (ST / HV) is needed and the header
 
 Plans of imporvement:
 - Reminder on race missing due to HKJC's server timeout.
-- Deal with HKJC Timeout problem - some days might have results but the server might return timeout or display "No record found".
-- Automatically check both ST & HV in one date.
+- Deal with HKJC Timeout problem - in someday there might be results exist but the server might return timeout or display "No record found". (Added timeout option on v1.1)
+- Automatically check both ST & HV on one date.
 - Convert Big5 inputstream to UTF-8 format.
 - Insert data into the database directly.
 - Restructure the whole program, it's a bit messy.
