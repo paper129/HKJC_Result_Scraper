@@ -65,7 +65,11 @@ def proc_dri(log_obj, html, driver, soup1, year, mth, day, RaceNo, loc, syr):
                 "Declare_Horse_Wt",
                 "Draw",
                 "LBW",
-                "RunningPos",
+                "RunningPos1",
+                "RunningPos2",
+                "RunningPos3",
+                "RunningPos4",
+                "RunningPos5",
                 "Finish_Time",
                 "Win_Odds",
                 "Class",
@@ -97,10 +101,23 @@ def proc_dri(log_obj, html, driver, soup1, year, mth, day, RaceNo, loc, syr):
                         .replace("                ", "")
                         .replace("            ", "")
                         .replace("        ", " ")
+                        .split(" ")
                         for i in vals.find_all("td")
                     ]
                     my_dict.update(dict(zip(headers, vals)))
                     # my_dict.update({'RaceID': RaceID})
+                    # Split RunningPos into 5 columns
+                    my_dict.update({"RunningPos1": vals[9][1]})
+                    my_dict.update({"RunningPos2": vals[9][2]})
+                    my_dict.update({"RunningPos3": vals[9][3]})
+                    try:
+                        my_dict.update({"RunningPos4": vals[9][4]})
+                    except Exception as e:
+                        my_dict.update({"RunningPos4": ""})
+                    try:
+                        my_dict.update({"RunningPos5": vals[9][5]})
+                    except Exception as e:
+                        my_dict.update({"RunningPos5": ""})
                     my_dict.update({"Class": RaceClass})
                     my_dict.update({"Loc": RaceLoc})
                     my_dict.update({"Length": RaceLenth})
